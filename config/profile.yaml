@@ -1,0 +1,69 @@
+target_functions:
+  - Go-To-Market (GTM)
+  - Business Operations
+  - Strategy & Operations
+  - Customer Success
+  - Account Management
+  - Fleet Operations
+  - Portfolio Operations
+
+# Any role title containing "strategy" or "operations" qualifies regardless of exact function label
+target_function_keywords:
+  - strategy
+  - operations
+  - go-to-market
+  - GTM
+
+target_industries:
+  - physical AI
+  - robotics
+  - autonomous vehicles
+  - drones
+  - industrial IoT
+  - defense tech
+  - manufacturing automation
+  - logistics automation
+  - autonomous surface vessels
+  - humanoid robotics
+
+target_seniority:
+  - Director
+  - Senior Manager
+  - Head of
+  - Chief of Staff
+  - VP
+
+level_notes: >
+  Prefer Director/Sr Manager/Head-of level. Flag but do not exclude
+  Manager-level roles at companies under 200 employees — title inflation
+  is common at early-stage physical AI startups. Hard exclude pure
+  individual contributor roles with no team or program scope mentioned
+  in the JD.
+
+exclude_title_keywords:
+  - engineer
+  - software
+  - ML
+  - machine learning
+  - research
+  - scientist
+  - designer
+  - legal
+  - finance
+  - recruiter
+  - IT
+  - accountant
+  - counsel
+  - paralegal
+  - data scientist
+  - hardware
+  - firmware
+  - embedded
+  - FPGA
+  - ASIC
+  - manufacturing engineer
+  - quality engineer
+
+red_flags:
+  - pure SaaS with no hardware or physical ops component
+  - no operational complexity in JD

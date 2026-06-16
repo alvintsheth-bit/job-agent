@@ -1,0 +1,24 @@
+# Secrets
+.env
+config/google_credentials.json
+config/google_token.json
+
+# Personal data
+config/resume_master.pdf
+
+# Runtime state
+data/last_run.json
+
+# Logs
+logs/*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# NOT ignored (these should be tracked):
+# config/vc_list.yaml
+# config/profile.yaml
+# config/company_list.yaml

@@ -1,0 +1,414 @@
+# Tier 1: careers page confirmed, poll 2x/week (Mon + Thu)
+tier1:
+  - company: Anduril
+    url: https://boards-api.greenhouse.io/v1/boards/andurilindustries/jobs?content=true
+    ats: greenhouse
+    slug: andurilindustries
+    vc: Lux/Founders Fund/a16z
+    tier: tier1
+    active: true
+
+  - company: Saronic
+    url: https://api.ashbyhq.com/posting-api/job-board/saronic
+    ats: ashby
+    slug: saronic
+    vc: Lux/Kleiner Perkins/Founders Fund
+    tier: tier1
+    active: true
+
+  - company: Skydio
+    url: https://api.ashbyhq.com/posting-api/job-board/skydio
+    ats: ashby
+    slug: skydio
+    vc: Playground Global
+    tier: tier1
+    active: true
+
+  - company: Cerebras
+    url: https://boards-api.greenhouse.io/v1/boards/cerebrassystems/jobs?content=true
+    ats: greenhouse
+    slug: cerebrassystems
+    vc: Eclipse
+    tier: tier1
+    active: true
+
+  - company: Apptronik
+    url: https://boards-api.greenhouse.io/v1/boards/apptronik/jobs?content=true
+    ats: greenhouse
+    slug: apptronik
+    vc: General Catalyst/Coatue
+    tier: tier1
+    active: true
+
+  - company: Applied Intuition
+    url: https://boards-api.greenhouse.io/v1/boards/appliedintuition/jobs?content=true
+    ats: greenhouse
+    slug: appliedintuition
+    vc: Lux/General Catalyst
+    tier: tier1
+    active: true
+
+  - company: Symbotic
+    url: https://symbotic.wd1.myworkdayjobs.com/symbotic
+    ats: workday
+    slug: symbotic
+    vc: SoftBank
+    tier: tier1
+    active: true
+
+  - company: Figure AI
+    url: https://boards-api.greenhouse.io/v1/boards/figureai/jobs?content=true
+    ats: greenhouse
+    slug: figureai
+    vc: Founders Fund/Tiger Global/Coatue
+    tier: tier1
+    active: true
+
+  - company: Bright Machines
+    url: https://api.lever.co/v0/postings/brightmachines?mode=json
+    ats: lever
+    slug: brightmachines
+    vc: Eclipse
+    tier: tier1
+    active: true
+
+  - company: Fox Robotics
+    url: https://boards-api.greenhouse.io/v1/boards/foxrobotics/jobs?content=true
+    ats: greenhouse
+    slug: foxrobotics
+    vc: Autotech
+    tier: tier1
+    active: true
+
+  - company: Nuro
+    url: https://boards-api.greenhouse.io/v1/boards/nuro/jobs?content=true
+    ats: greenhouse
+    slug: nuro
+    vc: DCVC/Khosla
+    tier: tier1
+    active: true
+
+  - company: Agility Robotics
+    url: https://boards-api.greenhouse.io/v1/boards/agilityrobotics/jobs?content=true
+    ats: greenhouse
+    slug: agilityrobotics
+    vc: Playground Global
+    tier: tier1
+    active: true
+
+  - company: Physical Intelligence
+    url: https://api.ashbyhq.com/posting-api/job-board/physicalintelligence
+    ats: ashby
+    slug: physicalintelligence
+    vc: Lux/Sequoia
+    tier: tier1
+    active: true
+
+  - company: Hadrian
+    url: https://api.ashbyhq.com/posting-api/job-board/hadrian-automation
+    ats: ashby
+    slug: hadrian-automation
+    vc: Lux/a16z
+    tier: tier1
+    active: true
+
+  - company: Waabi
+    url: https://api.lever.co/v0/postings/waabi?mode=json
+    ats: lever
+    slug: waabi
+    vc: Khosla
+    tier: tier1
+    active: true
+
+  - company: Carbon Robotics
+    url: https://carbonrobotics.com/careers
+    ats: custom
+    slug: null
+    vc: Khosla/HAX
+    tier: tier1
+    active: true
+
+  - company: Gecko Robotics
+    url: https://api.ashbyhq.com/posting-api/job-board/gecko-robotics
+    ats: ashby
+    slug: gecko-robotics
+    vc: Founders Fund
+    tier: tier1
+    active: true
+
+  - company: Bedrock Robotics
+    url: https://boards-api.greenhouse.io/v1/boards/bedrockrobotics/jobs?content=true
+    ats: greenhouse
+    slug: bedrockrobotics
+    vc: Eclipse
+    tier: tier1
+    active: true
+
+  - company: Saildrone
+    url: https://boards-api.greenhouse.io/v1/boards/saildrone/jobs?content=true
+    ats: greenhouse
+    slug: saildrone
+    vc: Lux
+    tier: tier1
+    active: true
+
+  - company: Gatik
+    url: https://boards-api.greenhouse.io/v1/boards/gatikaiinc/jobs?content=true
+    ats: greenhouse
+    slug: gatikaiinc
+    vc: Innovation Endeavors/Trucks VC
+    tier: tier1
+    active: true
+
+  - company: Shield AI
+    url: https://boards-api.greenhouse.io/v1/boards/shieldai/jobs?content=true
+    ats: greenhouse
+    slug: shieldai
+    vc: Shield Capital
+    tier: tier1
+    active: true
+
+  - company: Joby Aviation
+    url: https://boards-api.greenhouse.io/v1/boards/jobyaviation/jobs?content=true
+    ats: greenhouse
+    slug: jobyaviation
+    vc: GV
+    tier: tier1
+    active: true
+
+  - company: Archer Aviation
+    url: https://boards-api.greenhouse.io/v1/boards/archeraviation/jobs?content=true
+    ats: greenhouse
+    slug: archeraviation
+    vc: Founders Fund
+    tier: tier1
+    active: true
+
+  - company: Zipline
+    url: https://boards-api.greenhouse.io/v1/boards/zipline/jobs?content=true
+    ats: greenhouse
+    slug: zipline
+    vc: Sequoia/Khosla
+    tier: tier1
+    active: true
+
+  - company: Samsara
+    url: https://boards-api.greenhouse.io/v1/boards/samsara/jobs?content=true
+    ats: greenhouse
+    slug: samsara
+    vc: General Catalyst
+    tier: tier1
+    active: true
+
+  - company: Verkada
+    url: https://boards-api.greenhouse.io/v1/boards/verkada/jobs?content=true
+    ats: greenhouse
+    slug: verkada
+    vc: First Round
+    tier: tier1
+    active: true
+
+  - company: AMP Robotics
+    url: https://boards-api.greenhouse.io/v1/boards/amprobotics/jobs?content=true
+    ats: greenhouse
+    slug: amprobotics
+    vc: GV
+    tier: tier1
+    active: true
+
+  - company: Helsing
+    url: https://boards-api.greenhouse.io/v1/boards/helsing/jobs?content=true
+    ats: greenhouse
+    slug: helsing
+    vc: General Catalyst
+    tier: tier1
+    active: true
+
+  - company: Third Wave Automation
+    url: https://thirdwaveautomation.com/careers
+    ats: custom
+    slug: null
+    vc: Innovation Endeavors
+    tier: tier1
+    active: true
+
+# Tier 2: careers page unverified, Scout checks monthly
+tier2:
+  - company: Brain Corp
+    url: https://braincorp.com/careers
+    ats: custom
+    slug: null
+    vc: SoftBank
+    tier: tier2
+    active: true
+
+  - company: Relativity Space
+    url: https://relativityspace.com/careers
+    ats: greenhouse
+    slug: relativityspace
+    vc: Playground Global
+    tier: tier2
+    active: true
+
+  - company: Echodyne
+    url: https://echodyne.com/careers
+    ats: custom
+    slug: null
+    vc: Lux
+    tier: tier2
+    active: true
+
+  - company: Halter
+    url: https://halterhq.com/careers
+    ats: custom
+    slug: null
+    vc: DCVC
+    tier: tier2
+    active: true
+
+  - company: Robust AI
+    url: https://robust.ai/careers
+    ats: custom
+    slug: null
+    vc: Playground Global
+    tier: tier2
+    active: true
+
+  - company: True Anomaly
+    url: https://trueanomaly.space/careers
+    ats: custom
+    slug: null
+    vc: Eclipse
+    tier: tier2
+    active: true
+
+  - company: Blue Water Autonomy
+    url: https://bluewaterautonomy.com/careers
+    ats: custom
+    slug: null
+    vc: Eclipse/GV
+    tier: tier2
+    active: true
+
+  - company: Field AI
+    url: https://field.ai/careers
+    ats: custom
+    slug: null
+    vc: Khosla/Sequoia
+    tier: tier2
+    active: true
+
+  - company: Overland AI
+    url: https://overland.ai/careers
+    ats: custom
+    slug: null
+    vc: Trucks VC
+    tier: tier2
+    active: true
+
+  - company: Forterra
+    url: https://forterra.co/careers
+    ats: custom
+    slug: null
+    vc: Shield Capital
+    tier: tier2
+    active: true
+
+  - company: Skild AI
+    url: https://skild.ai/careers
+    ats: custom
+    slug: null
+    vc: Coatue/Sequoia/SoftBank
+    tier: tier2
+    active: true
+
+  - company: Varda Space
+    url: https://vardaspace.com/careers
+    ats: greenhouse
+    slug: vardaspace
+    vc: Founders Fund
+    tier: tier2
+    active: true
+
+  - company: Machina Labs
+    url: https://machinalabs.ai/careers
+    ats: custom
+    slug: null
+    vc: Innovation Endeavors
+    tier: tier2
+    active: true
+
+  - company: Avidbots
+    url: https://avidbots.com/careers
+    ats: custom
+    slug: null
+    vc: HAX/SOSV
+    tier: tier2
+    active: true
+
+  - company: Simbe Robotics
+    url: https://simberobotics.com/careers
+    ats: custom
+    slug: null
+    vc: HAX/SOSV
+    tier: tier2
+    active: true
+
+  - company: AutoStore
+    url: https://autostoresystem.com/careers
+    ats: custom
+    slug: null
+    vc: SoftBank
+    tier: tier2
+    active: true
+
+  - company: Bear Robotics
+    url: https://bearrobotics.ai/careers
+    ats: custom
+    slug: null
+    vc: SoftBank
+    tier: tier2
+    active: true
+
+  - company: Castelion
+    url: https://castelion.com/careers
+    ats: custom
+    slug: null
+    vc: General Catalyst
+    tier: tier2
+    active: true
+
+  - company: K2 Space
+    url: https://k2space.com/careers
+    ats: ashby
+    slug: k2space
+    vc: First Round
+    tier: tier2
+    active: true
+
+# Additional job boards (not company-specific, Watcher handles)
+boards:
+  - name: Wellfound Robotics
+    url: https://wellfound.com/startups/industry/robotics
+    type: html
+    active: true
+
+  - name: Built In SF
+    url: https://builtin.com/jobs/dev-engineering/robotics
+    type: html
+    active: true
+
+  - name: Careers in Robotics
+    url: https://careersinrobotics.com
+    type: html
+    active: true
+
+  - name: General Catalyst Portfolio Board
+    url: https://jobs.generalcatalyst.com
+    type: html
+    active: true
+
+  - name: a16z American Dynamism
+    url: https://jobs.a16z.com
+    type: html
+    active: true
