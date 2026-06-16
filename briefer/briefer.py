@@ -61,19 +61,19 @@ def run():
 
     rows = get_all_rows("Jobs")
     color_updates: list[tuple[int, str]] = []
-    status_update_count = 0
+    status_updates: list[tuple[int, str]] = []  # (row_idx, new_notes)
+    ts_str = now.strftime("%Y-%m-%d %H:%M")
 
     for i, row in enumerate(rows):
-        sheet_row_idx = i + 2  # header + 1-indexed
+        sheet_row_idx = i + 2
 
         color = row_color(row)
         if color:
             color_updates.append((sheet_row_idx, color))
 
-        # Append status note for rows found in last 24h
+        # Collect status notes for rows found in last 24h
         status = row.get("status", "")
         notes = str(row.get("notes", ""))
-        ts_str = now.strftime("%Y-%m-%d %H:%M")
         status_note = f"[{ts_str}] Status → {status}"
         if status and status_note not in notes:
             date_found = str(row.get("date_found", ""))
@@ -81,18 +81,25 @@ def run():
                 from datetime import date
                 found_date = datetime.strptime(date_found, "%Y-%m-%d").replace(tzinfo=timezone.utc)
                 if found_date >= cutoff_24h:
-                    new_notes = f"{notes}\n{status_note}".strip()
-                    update_row("Jobs", sheet_row_idx, {"notes": new_notes})
-                    status_update_count += 1
+                    status_updates.append((sheet_row_idx, f"{notes}\n{status_note}".strip()))
             except Exception:
                 pass
 
-    # Batch all color updates in minimal API calls
+    # Colors first (batch) — do this while quota is fresh
     try:
         batch_set_row_colors("Jobs", color_updates)
     except Exception as e:
         log.error(f"Batch color update failed: {e}")
     colored_count = len(color_updates)
+
+    # Status note updates after colors are done
+    status_update_count = 0
+    for sheet_row_idx, new_notes in status_updates:
+        try:
+            update_row("Jobs", sheet_row_idx, {"notes": new_notes})
+            status_update_count += 1
+        except Exception:
+            pass
 
     log.info(
         f"Briefer {now.strftime('%Y-%m-%d %H:%M')}: "
