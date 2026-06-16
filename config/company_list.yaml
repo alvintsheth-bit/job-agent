@@ -41,15 +41,15 @@ tier1:
     active: true
 
   - company: Applied Intuition
-    url: https://boards-api.greenhouse.io/v1/boards/appliedintuition/jobs?content=true
-    ats: greenhouse
-    slug: appliedintuition
+    url: https://api.ashbyhq.com/posting-api/job-board/applied
+    ats: ashby
+    slug: applied
     vc: Lux/General Catalyst
     tier: tier1
     active: true
 
   - company: Symbotic
-    url: https://symbotic.wd1.myworkdayjobs.com/symbotic
+    url: https://symbotic.wd1.myworkdayjobs.com/Symbotic_Careers
     ats: workday
     slug: symbotic
     vc: SoftBank
@@ -73,9 +73,9 @@ tier1:
     active: true
 
   - company: Fox Robotics
-    url: https://boards-api.greenhouse.io/v1/boards/foxrobotics/jobs?content=true
-    ats: greenhouse
-    slug: foxrobotics
+    url: https://www.foxrobotics.com/careers
+    ats: custom
+    slug: null
     vc: Autotech
     tier: tier1
     active: true
@@ -145,9 +145,9 @@ tier1:
     active: true
 
   - company: Saildrone
-    url: https://boards-api.greenhouse.io/v1/boards/saildrone/jobs?content=true
+    url: https://boards-api.greenhouse.io/v1/boards/saildroneinc/jobs?content=true
     ats: greenhouse
-    slug: saildrone
+    slug: saildroneinc
     vc: Lux
     tier: tier1
     active: true
@@ -161,33 +161,33 @@ tier1:
     active: true
 
   - company: Shield AI
-    url: https://boards-api.greenhouse.io/v1/boards/shieldai/jobs?content=true
-    ats: greenhouse
+    url: https://api.lever.co/v0/postings/shieldai?mode=json
+    ats: lever
     slug: shieldai
     vc: Shield Capital
     tier: tier1
     active: true
 
   - company: Joby Aviation
-    url: https://boards-api.greenhouse.io/v1/boards/jobyaviation/jobs?content=true
-    ats: greenhouse
+    url: https://api.lever.co/v0/postings/jobyaviation?mode=json
+    ats: lever
     slug: jobyaviation
     vc: GV
     tier: tier1
     active: true
 
   - company: Archer Aviation
-    url: https://api.lever.co/v0/postings/archeraviation?mode=json
-    ats: lever
-    slug: archeraviation
+    url: https://www.archer.com/careers
+    ats: custom
+    slug: null
     vc: Founders Fund
     tier: tier1
     active: true
 
   - company: Zipline
-    url: https://api.lever.co/v0/postings/zipline?mode=json
-    ats: lever
-    slug: zipline
+    url: https://www.zipline.com/careers
+    ats: custom
+    slug: null
     vc: Sequoia/Khosla
     tier: tier1
     active: true

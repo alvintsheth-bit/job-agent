@@ -82,8 +82,10 @@ def fetch_ashby(company: dict) -> list[dict]:
         resp = requests.get(company["url"], headers=HEADERS, timeout=20)
         resp.raise_for_status()
         data = resp.json()
+        # Ashby returns jobPostings for most boards, but jobs for some (e.g. "applied")
+        postings = data.get("jobPostings") or data.get("jobs") or []
         jobs = []
-        for j in data.get("jobPostings", []):
+        for j in postings:
             jd_html = j.get("descriptionHtml", "")
             jobs.append({
                 "company": company["company"],
