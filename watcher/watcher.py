@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, os.path.expanduser("~/job-agent"))
 from shared.db import set_last_run
-from shared.sheets import get_all_rows, append_row
+from shared.sheets import get_all_rows, batch_append_rows
 
 load_dotenv(os.path.expanduser("~/job-agent/config/.env"))
 
@@ -197,6 +197,7 @@ def run():
         jobs = fetcher(company)
         log.info(f"{company['company']}: fetched {len(jobs)} raw listings via {ats}")
 
+        new_rows = []
         for job in jobs:
             title = job["role_title"].strip()
             if not title:
@@ -208,7 +209,7 @@ def run():
             if key in seen:
                 log.debug(f"  SKIP (exists): {title}")
                 continue
-            row = {
+            new_rows.append({
                 "company": job["company"],
                 "role_title": title,
                 "url": job["url"],
@@ -223,14 +224,17 @@ def run():
                 "resume_hook": "",
                 "applied_date": "",
                 "notes": "",
-            }
+            })
+            seen.add(key)
+
+        if new_rows:
             try:
-                append_row("Jobs", row)
-                seen.add(key)
-                new_count += 1
-                log.info(f"  ADDED: {title}")
+                batch_append_rows("Jobs", new_rows)
+                new_count += len(new_rows)
+                for r in new_rows:
+                    log.info(f"  ADDED: {r['role_title']}")
             except Exception as e:
-                log.error(f"  Sheet write failed for '{title}': {e}")
+                log.error(f"  Batch write failed for {company['company']}: {e}")
 
     log.info(f"Watcher done: {new_count} new jobs added")
     set_last_run("watcher")

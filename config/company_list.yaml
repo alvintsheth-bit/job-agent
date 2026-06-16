@@ -177,16 +177,16 @@ tier1:
     active: true
 
   - company: Archer Aviation
-    url: https://boards-api.greenhouse.io/v1/boards/archeraviation/jobs?content=true
-    ats: greenhouse
+    url: https://api.lever.co/v0/postings/archeraviation?mode=json
+    ats: lever
     slug: archeraviation
     vc: Founders Fund
     tier: tier1
     active: true
 
   - company: Zipline
-    url: https://boards-api.greenhouse.io/v1/boards/zipline/jobs?content=true
-    ats: greenhouse
+    url: https://api.lever.co/v0/postings/zipline?mode=json
+    ats: lever
     slug: zipline
     vc: Sequoia/Khosla
     tier: tier1
@@ -209,9 +209,9 @@ tier1:
     active: true
 
   - company: AMP Robotics
-    url: https://boards-api.greenhouse.io/v1/boards/amprobotics/jobs?content=true
+    url: https://boards-api.greenhouse.io/v1/boards/ampsortation/jobs?content=true
     ats: greenhouse
-    slug: amprobotics
+    slug: ampsortation
     vc: GV
     tier: tier1
     active: true
@@ -225,9 +225,9 @@ tier1:
     active: true
 
   - company: Third Wave Automation
-    url: https://thirdwaveautomation.com/careers
-    ats: custom
-    slug: null
+    url: https://boards-api.greenhouse.io/v1/boards/thirdwaveautomation/jobs?content=true
+    ats: greenhouse
+    slug: thirdwaveautomation
     vc: Innovation Endeavors
     tier: tier1
     active: true
