@@ -214,31 +214,41 @@ def find_row(tab_name: str, column_name: str, value: str) -> tuple[dict, int] | 
 
 
 def set_row_color(tab_name: str, row_index: int, hex_color: str) -> None:
+    batch_set_row_colors(tab_name, [(row_index, hex_color)])
+
+
+def batch_set_row_colors(tab_name: str, row_colors: list[tuple[int, str]]) -> None:
+    """Set colors for many rows in a minimal number of API calls (chunks of 500)."""
+    if not row_colors:
+        return
     ss = get_or_create_spreadsheet()
     ws = _worksheet(tab_name)
-    hex_color = hex_color.lstrip("#")
-    r = int(hex_color[0:2], 16) / 255
-    g = int(hex_color[2:4], 16) / 255
-    b = int(hex_color[4:6], 16) / 255
     sheet_id = ws.id
-    body = {
-        "requests": [{
+
+    def _make_request(row_index: int, hex_color: str) -> dict:
+        hx = hex_color.lstrip("#")
+        r = int(hx[0:2], 16) / 255
+        g = int(hx[2:4], 16) / 255
+        b = int(hx[4:6], 16) / 255
+        return {
             "repeatCell": {
                 "range": {
                     "sheetId": sheet_id,
                     "startRowIndex": row_index - 1,
                     "endRowIndex": row_index,
                 },
-                "cell": {
-                    "userEnteredFormat": {
-                        "backgroundColor": {"red": r, "green": g, "blue": b}
-                    }
-                },
+                "cell": {"userEnteredFormat": {"backgroundColor": {"red": r, "green": g, "blue": b}}},
                 "fields": "userEnteredFormat.backgroundColor",
             }
-        }]
-    }
-    _retry(lambda: ss.batch_update(body))
+        }
+
+    chunk_size = 500
+    for i in range(0, len(row_colors), chunk_size):
+        chunk = row_colors[i:i + chunk_size]
+        body = {"requests": [_make_request(idx, color) for idx, color in chunk]}
+        _retry(lambda b=body: ss.batch_update(b))
+        if i + chunk_size < len(row_colors):
+            time.sleep(20)  # stay under 300 read requests/min quota
 
 
 def sheet_exists(title: str) -> bool:

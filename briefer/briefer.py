@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 sys.path.insert(0, os.path.expanduser("~/job-agent"))
 from shared.db import set_last_run
-from shared.sheets import get_all_rows, update_row, set_row_color
+from shared.sheets import get_all_rows, update_row, batch_set_row_colors
 
 load_dotenv(os.path.expanduser("~/job-agent/config/.env"))
 
@@ -60,7 +60,7 @@ def run():
     cutoff_24h = now - timedelta(hours=24)
 
     rows = get_all_rows("Jobs")
-    colored_count = 0
+    color_updates: list[tuple[int, str]] = []
     status_update_count = 0
 
     for i, row in enumerate(rows):
@@ -68,21 +68,15 @@ def run():
 
         color = row_color(row)
         if color:
-            try:
-                set_row_color("Jobs", sheet_row_idx, color)
-                colored_count += 1
-            except Exception as e:
-                log.error(f"  Color set failed row {sheet_row_idx}: {e}")
+            color_updates.append((sheet_row_idx, color))
 
-        # Append status change note if status changed within last 24h
-        # We detect this by checking if notes already has today's timestamp
+        # Append status note for rows found in last 24h
         status = row.get("status", "")
         notes = str(row.get("notes", ""))
         ts_str = now.strftime("%Y-%m-%d %H:%M")
         status_note = f"[{ts_str}] Status → {status}"
         if status and status_note not in notes:
             date_found = str(row.get("date_found", ""))
-            # Approximate: if the row was found within last 24h, append status note
             try:
                 from datetime import date
                 found_date = datetime.strptime(date_found, "%Y-%m-%d").replace(tzinfo=timezone.utc)
@@ -92,6 +86,13 @@ def run():
                     status_update_count += 1
             except Exception:
                 pass
+
+    # Batch all color updates in minimal API calls
+    try:
+        batch_set_row_colors("Jobs", color_updates)
+    except Exception as e:
+        log.error(f"Batch color update failed: {e}")
+    colored_count = len(color_updates)
 
     log.info(
         f"Briefer {now.strftime('%Y-%m-%d %H:%M')}: "
