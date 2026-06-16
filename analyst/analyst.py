@@ -70,9 +70,9 @@ def score_job(client: anthropic.Anthropic, resume_text: str, profile_yaml: str,
     )
     user_msg = f"Company: {company}\nTitle: {title}\nJob Description: {jd_text}"
     resp = client.messages.create(
-        model="claude-sonnet-4-6",
+        model="claude-haiku-4-5-20251001",
         max_tokens=500,
-        system=system,
+        system=[{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
         messages=[{"role": "user", "content": user_msg}],
     )
     raw = resp.content[0].text.strip()

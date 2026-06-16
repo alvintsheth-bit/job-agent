@@ -85,13 +85,17 @@ def url_is_live(url: str) -> bool:
 def find_careers_url(client: anthropic.Anthropic, company_name: str) -> tuple[str, str]:
     """Returns (careers_url, ats_type). Uses Claude web_search to find it."""
     prompt = (
-        f"Find the official careers/jobs page URL for '{company_name}'. "
-        f"Also identify the ATS type (greenhouse, ashby, lever, workday, or custom). "
-        f"Return JSON only: {{\"careers_url\": \"...\", \"ats_type\": \"...\"}}"
+        f"Find the ATS API endpoint for '{company_name}' jobs. "
+        f"If Greenhouse, return: https://boards-api.greenhouse.io/v1/boards/SLUG/jobs?content=true "
+        f"If Ashby, return: https://api.ashbyhq.com/posting-api/job-board/SLUG "
+        f"If Lever, return: https://api.lever.co/v0/postings/SLUG?mode=json "
+        f"If Workday, return the Workday careers URL. "
+        f"If none of the above, return the human careers page URL and set ats_type to custom. "
+        f"Return JSON only: {{\"careers_url\": \"...\", \"ats_type\": \"greenhouse|ashby|lever|workday|custom\"}}"
     )
     try:
         resp = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-haiku-4-5-20251001",
             max_tokens=200,
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
             messages=[{"role": "user", "content": prompt}],
@@ -123,7 +127,7 @@ def discover_companies_for_vc(client: anthropic.Anthropic, vc_name: str,
     )
     try:
         resp = client.messages.create(
-            model="claude-sonnet-4-6",
+            model="claude-haiku-4-5-20251001",
             max_tokens=1000,
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
             messages=[{"role": "user", "content": prompt}],
@@ -257,7 +261,7 @@ def save_company_list(company_data: dict) -> None:
         yaml.dump(company_data, f, default_flow_style=False, allow_unicode=True)
 
 
-def run(force: bool = False):
+def run(force: bool = False, vc_limit: int = 5):
     log.info(f"Scout starting (force={force})")
 
     # Check if already ran this month
@@ -287,7 +291,7 @@ def run(force: bool = False):
     existing = existing_company_names(company_data)
     new_proposals = []
 
-    for vc in vcs[:5]:  # Limit to 5 VCs per run to control API costs
+    for vc in vcs[:vc_limit]:
         log.info(f"  Searching: {vc}")
         candidates = discover_companies_for_vc(client, vc, existing)
         for candidate in candidates:
@@ -336,5 +340,7 @@ def run(force: bool = False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Scout: discover new Physical AI companies")
     parser.add_argument("--force", action="store_true", help="Run even if already ran this month")
+    parser.add_argument("--vc-limit", type=int, default=5, help="Max VCs to scan per run (default 5; use 0 for all)")
     args = parser.parse_args()
-    run(force=args.force)
+    limit = len(load_vc_list()) if args.vc_limit == 0 else args.vc_limit
+    run(force=args.force, vc_limit=limit)

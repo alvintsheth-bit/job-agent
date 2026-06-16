@@ -46,6 +46,33 @@ def load_companies() -> list[dict]:
     return [c for c in tier1 if c.get("active", True)]
 
 
+def load_scout_review_companies(existing_names: set[str]) -> list[dict]:
+    """Load tier1-approved companies from Scout Review tab (user-set tier=tier1)."""
+    try:
+        rows = get_all_rows("Scout Review")
+        companies = []
+        for r in rows:
+            if str(r.get("tier", "")).strip().lower() != "tier1":
+                continue
+            name = r.get("company", "").strip()
+            url = r.get("careers_url", "").strip()
+            if not name or not url or name.lower() in existing_names:
+                continue
+            companies.append({
+                "company": name,
+                "url": url,
+                "ats": r.get("ats_type", "custom"),
+                "tier": "tier1",
+                "active": True,
+            })
+        if companies:
+            log.info(f"Scout Review: {len(companies)} tier1 companies queued")
+        return companies
+    except Exception as e:
+        log.warning(f"Could not load Scout Review companies: {e}")
+        return []
+
+
 def is_excluded(title: str, keywords: list[str]) -> bool:
     title_lower = title.lower()
     return any(kw in title_lower for kw in keywords)
@@ -122,6 +149,27 @@ def fetch_lever(company: dict) -> list[dict]:
         return []
 
 
+def fetch_bamboohr(company: dict) -> list[dict]:
+    try:
+        resp = requests.get(company["url"], headers=HEADERS, timeout=20)
+        resp.raise_for_status()
+        data = resp.json()
+        jobs = []
+        for j in data.get("result", []):
+            jobs.append({
+                "company": company["company"],
+                "role_title": j.get("jobOpeningName", ""),
+                "url": j.get("jobOpeningShareUrl", company["url"]),
+                "jd_text": "",
+                "source": "bamboohr",
+                "ats_type": "bamboohr",
+            })
+        return jobs
+    except Exception as e:
+        log.error(f"BambooHR fetch failed for {company['company']}: {e}")
+        return []
+
+
 def fetch_workday(company: dict) -> list[dict]:
     try:
         resp = requests.get(company["url"], headers=HEADERS, timeout=30)
@@ -181,6 +229,7 @@ FETCHERS = {
     "ashby": fetch_ashby,
     "lever": fetch_lever,
     "workday": fetch_workday,
+    "bamboohr": fetch_bamboohr,
     "custom": fetch_custom,
 }
 
@@ -189,6 +238,10 @@ def run():
     log.info("Watcher starting")
     exclude_kws = load_exclude_keywords()
     companies = load_companies()
+    existing_names = {c["company"].lower() for c in companies}
+    scout_companies = load_scout_review_companies(existing_names)
+    companies = companies + scout_companies
+    log.info(f"Polling {len(companies)} companies ({len(scout_companies)} from Scout Review)")
     seen = existing_jobs()
     today = date.today().isoformat()
     new_count = 0

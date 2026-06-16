@@ -37,7 +37,7 @@ TAB_SCHEMAS = {
         "subject", "classification", "notes",
     ],
     "Scout Review": [
-        "company", "careers_url", "ats_type", "vc_backer", "tier", "rationale", "action",
+        "company", "careers_url", "ats_type", "vc_backer", "tier", "rationale",
     ],
     "Company List": [
         "company", "careers_url", "ats_type", "vc_backer", "tier", "date_added", "active",
